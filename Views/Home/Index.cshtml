@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<!-- Alert Message -->
+@if (TempData["message"] != null)
+{
+    <script>
+        alert('@TempData["message"]');
+    </script>
+}
+
+<!-- Custom CSS to make all images the same size -->
+<style>
+    .image-card img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover; /* This keeps the image from being distorted */
+    }
+</style>
+
+<main class="container mt-5">
+    <div class="text-center mb-4">
+        <h2 class="fw-bold text-primary">Choose Your Favorite Image</h2>
+        <p class="text-muted">Select from the options and submit your choice.</p>
+    </div>
+
+    @using (Html.BeginForm("ResponseOfUser", "Home", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row justify-content-center mb-4">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="selectedImage" class="form-label">Select an image:</label>
+                    <select name="SelectedImage" id="selectedImage" class="form-select">
+                        <option value="image1">Image 1</option>
+                        <option value="image2">Image 2</option>
+                        <option value="image3">Image 3</option>
+                    </select>
+                </div>
+                <div class="form-group text-center mt-3">
+                    <button type="submit" class="btn btn-success px-4">Submit</button>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row g-4">
+        <div class="col-md-3 col-sm-6">
+            <div class="card image-card shadow-sm">
+                <img src="~/Images/image1.jpeg" class="card-img-top" alt="Image 1" />
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="card image-card shadow-sm">
+                <img src="~/Images/image2.jpeg" class="card-img-top" alt="Image 2" />
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="card image-card shadow-sm">
+                <img src="~/Images/image3.jpeg" class="card-img-top" alt="Image 3" />
+            </div>
+        </div>
+    </div>
+</main>
